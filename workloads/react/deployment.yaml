@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: react-ui
-        image: gauravbhhardwaj1111/agentic-ai-react-ui:v1
+        image: gauravbhhardwaj1111/agentic-ai-react-ui:v4
         imagePullPolicy: Always
  
         ports:
