@@ -20,8 +20,10 @@ spec:
     spec:
       containers:
       - name: react-ui
-        image: gauravbhhardwaj1111/agentic-ai-react-ui:v4
+        image: 20-72-172-104.nip.io/react-ui/react-ui:latest
         imagePullPolicy: Always
+        imagePullSecrets:
+        - name: harbor-secret
  
         ports:
         - containerPort: 80
