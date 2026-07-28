@@ -1,0 +1,9 @@
+grafana:
+  grafana.ini:
+    server:
+      root_url: "%(protocol)s://%(domain)s/Grafana/"
+      serve_from_sub_path: true
+
+prometheus:
+  prometheusSpec:
+    routePrefix: /Prometheus
