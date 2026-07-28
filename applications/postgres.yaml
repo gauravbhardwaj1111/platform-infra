@@ -8,23 +8,18 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: https://charts.bitnami.com/bitnami
-    chart: postgresql
-    targetRevision: 16.x.x
-
-    helm:
-      valueFiles:
-        - $values/values/postgres/values.yaml
-
   sources:
-  - repoURL: https://charts.bitnami.com/bitnami
-    chart: postgresql
-    targetRevision: 16.x.x
+    - repoURL: https://charts.timescale.com
+      chart: timescaledb-single
+      targetRevision: 0.34.0
 
-  - repoURL: https://github.com/gauravbhardwaj1111/platform-infra.git
-    targetRevision: main
-    ref: values
+      helm:
+        valueFiles:
+          - $values/values/postgres/values.yaml
+
+    - repoURL: https://github.com/gauravbhardwaj1111/platform-infra.git
+      targetRevision: main
+      ref: values
 
   destination:
     server: https://kubernetes.default.svc
@@ -34,3 +29,6 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true
