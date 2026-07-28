@@ -1,0 +1,13 @@
+auth:
+  postgresPassword: AgenticAI@321
+  database: tokeniq
+
+primary:
+  persistence:
+    enabled: true
+    size: 20Gi
+
+image:
+  registry: docker.io
+  repository: timescale/timescaledb
+  tag: latest-pg16

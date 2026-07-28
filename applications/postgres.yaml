@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: postgres
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 16.x.x
+
+    helm:
+      valueFiles:
+        - $values/values/postgres/values.yaml
+
+  sources:
+  - repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 16.x.x
+
+  - repoURL: https://github.com/gauravbhardwaj1111/platform-infra.git
+    targetRevision: main
+    ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: llm-ns
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
