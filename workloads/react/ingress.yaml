@@ -9,12 +9,13 @@ spec:
   ingressClassName: nginx
 
   rules:
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: react-service
-              port:
-                number: 80
+    - host: 20-72-172-104.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: react-service
+                port:
+                  number: 80
