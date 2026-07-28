@@ -7,4 +7,5 @@ controller:
   metrics:
     enabled: true
 
-  admissionWebhooks:enabled: false
+  admissionWebhooks:
+    enabled: false
