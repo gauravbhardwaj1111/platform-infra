@@ -22,6 +22,9 @@ grafana:
 
 prometheus:
   prometheusSpec:
+    externalUrl: https://20-72-172-104.nip.io/prometheus
+    routePrefix: /prometheus
+
     storageSpec:
       volumeClaimTemplate:
         spec:
