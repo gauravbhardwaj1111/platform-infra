@@ -1,33 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
- 
+
 metadata:
   name: react-ui
   namespace: llm-ns
- 
+
 spec:
   replicas: 1
- 
+
   selector:
     matchLabels:
       app: react-ui
- 
+
   template:
     metadata:
       labels:
         app: react-ui
- 
+
     spec:
+      imagePullSecrets:
+      - name: harbor-secret
+
       containers:
       - name: react-ui
         image: 20-72-172-104.nip.io/react-ui/react-ui:latest
         imagePullPolicy: Always
-        imagePullSecrets:
-        - name: harbor-secret
- 
+
         ports:
         - containerPort: 80
- 
+
         resources:
           requests:
             cpu: "250m"
