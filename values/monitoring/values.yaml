@@ -44,6 +44,11 @@ prometheus:
     paths:
       - /prometheus
 
+    pathType: Prefix
+
+  service:
+    port: 9090
+
 alertmanager:
   alertmanagerSpec:
     storage:
