@@ -9,7 +9,6 @@ spec:
   ingressClassName: nginx
 
   rules:
-    host: 20-72-172-104.nip.io
     http:
       paths:
         - path: /
