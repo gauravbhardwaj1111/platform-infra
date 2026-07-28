@@ -1,9 +1,57 @@
 grafana:
-  grafana.ini:
-    server:
-      root_url: "%(protocol)s://%(domain)s/Grafana/"
-      serve_from_sub_path: true
+  adminPassword: admin123
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+
+    hosts:
+      - 20-72-172-104.nip.io
+
+    path: /grafana
+    pathType: Prefix
+
+  persistence:
+    enabled: true
+    size: 10Gi
 
 prometheus:
   prometheusSpec:
-    routePrefix: /Prometheus
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+
+    hosts:
+      - 20-72-172-104.nip.io
+
+    paths:
+      - /prometheus
+
+alertmanager:
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi
+
+nodeExporter:
+  enabled: true
+
+kubeStateMetrics:
+  enabled: true
+
+defaultRules:
+  create: true
