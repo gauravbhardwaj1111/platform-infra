@@ -9,7 +9,8 @@ spec:
   ingressClassName: nginx
 
   rules:
-    - http:
+    - host: app.20-72-172-104.nip.io
+      http:
         paths:
           - path: /
             pathType: Prefix
