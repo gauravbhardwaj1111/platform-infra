@@ -1,8 +1,10 @@
 apiVersion: apps/v1
 kind: StatefulSet
+
 metadata:
   name: timescaledb
   namespace: llm-ns
+
 spec:
   serviceName: timescaledb-service
   replicas: 1
@@ -23,8 +25,8 @@ spec:
           imagePullPolicy: IfNotPresent
 
           ports:
-            - name: postgres
-              containerPort: 5432
+            - containerPort: 5432
+              name: postgres
 
           env:
             - name: POSTGRES_USER
@@ -44,6 +46,10 @@ spec:
                 secretKeyRef:
                   name: timescaledb-secret
                   key: POSTGRES_DB
+
+            # IMPORTANT: Store database files in a subdirectory
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
 
           resources:
             requests:
