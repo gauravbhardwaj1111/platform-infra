@@ -25,10 +25,8 @@ spec:
     server: https://kubernetes.default.svc
     namespace: llm-ns
 
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  syncPolicy: 
+    
 
     syncOptions:
       - CreateNamespace=true
