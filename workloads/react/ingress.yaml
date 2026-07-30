@@ -4,12 +4,21 @@ kind: Ingress
 metadata:
   name: react-ingress
   namespace: llm-ns
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 
 spec:
   ingressClassName: nginx
 
+  tls:
+    - hosts:
+        - 20-72-172-104.nip.io
+      secretName: react-tls
+
   rules:
-    - http:
+    - host: 20-72-172-104.nip.io
+      http:
         paths:
           - path: /
             pathType: Prefix
