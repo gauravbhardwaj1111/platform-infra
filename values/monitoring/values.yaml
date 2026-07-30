@@ -1,30 +1,23 @@
 grafana:
   adminPassword: admin123
-
   grafana.ini:
     server:
       root_url: "%(protocol)s://%(domain)s/grafana"
       serve_from_sub_path: true
-
   ingress:
     enabled: true
     ingressClassName: nginx
-
     hosts:
       - 20-72-172-104.nip.io
-
     path: /grafana
     pathType: Prefix
-
   persistence:
     enabled: true
     size: 10Gi
-
 prometheus:
   prometheusSpec:
     externalUrl: https://20-72-172-104.nip.io/prometheus
     routePrefix: /prometheus
-
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -33,22 +26,29 @@ prometheus:
           resources:
             requests:
               storage: 20Gi
-
+    additionalScrapeConfigs:
+      - job_name: vllm
+        static_configs:
+          - targets:
+              - vllm-service.llm-ns.svc.cluster.local:8000
+        metrics_path: /metrics
+        scrape_interval: 30s
+      - job_name: qdrant
+        static_configs:
+          - targets:
+              - vllmdb-service.llm-ns.svc.cluster.local:6333
+        metrics_path: /metrics
+        scrape_interval: 30s
   ingress:
     enabled: true
     ingressClassName: nginx
-
     hosts:
       - 20-72-172-104.nip.io
-
     paths:
       - /prometheus
-
     pathType: Prefix
-
   service:
     port: 9090
-
 alertmanager:
   alertmanagerSpec:
     storage:
@@ -59,12 +59,9 @@ alertmanager:
           resources:
             requests:
               storage: 5Gi
-
 nodeExporter:
   enabled: true
-
 kubeStateMetrics:
   enabled: true
-
 defaultRules:
   create: true
