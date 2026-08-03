@@ -39,6 +39,12 @@ prometheus:
               - vllmdb-service.llm-ns.svc.cluster.local:6333
         metrics_path: /metrics
         scrape_interval: 30s
+        - job_name: fastapi
+        static_configs:
+          - targets:
+              - fastapi-agentic-svc.llm-ns.svc.cluster.local:80
+        metrics_path: /fastapi/metrics
+        scrape_interval: 30s
   ingress:
     enabled: true
     ingressClassName: nginx
