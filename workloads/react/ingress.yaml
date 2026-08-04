@@ -1,13 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
   name: react-ingress
   namespace: llm-ns
-
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
-
+  tls:
+    - hosts:
+        - react.20-72-172-104.nip.io
+      secretName: react-subdomain-tls
   rules:
     - host: react.20-72-172-104.nip.io
       http:
