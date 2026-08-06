@@ -23,7 +23,7 @@ spec:
 
       containers:
       - name: react-ui
-        image: harbor.20-72-172-104.nip.io/react-ui/react-ui:v10
+        image: harbor.20-72-172-104.nip.io/react-ui/react-ui:v11
         imagePullPolicy: Always
 
         ports:
